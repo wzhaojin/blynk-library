@@ -61,7 +61,7 @@ const char* config_form = R"html(
     <table>
     <tr><td><label for="ssid">WiFi SSID:</label></td>  <td><input type="text" name="ssid" length=64 required="required"></td></tr>
     <tr><td><label for="pass">Password:</label></td>   <td><input type="text" name="pass" length=64></td></tr>
-    <tr><td><label for="blynk">Auth token:</label></td><td><input type="text" name="blynk" placeholder="a0b1c2d..." pattern="[a-zA-Z0-9]{32}" maxlength="32" required="required"></td></tr>
+    <tr><td><label for="blynk">Auth token:</label></td><td><input type="text" name="blynk" placeholder="a0b1c2d..." pattern="[_-a-zA-Z0-9]{32}" maxlength="32" required="required"></td></tr>
     <tr><td><label for="host">Host:</label></td>       <td><input type="text" name="host" length=64></td></tr>
     <tr><td><label for="port">Port:</label></td>       <td><input type="number" name="port" value="80" min="1" max="65535"></td></tr>
     </table><br/>
@@ -157,12 +157,13 @@ void enterConfigMode()
     content_type = "application/json";
   } break;
   case REQ_BOARD_INFO: {
+    const char* tmpl = BOARD_TEMPLATE_ID;
     char buff[256];
     snprintf(buff, sizeof(buff),
       R"json({"board":"%s","vendor":"%s","tmpl_id":"%s","fw_ver":"%s","hw_ver":"%s"})json",
       BOARD_NAME,
       BOARD_VENDOR,
-      BOARD_TEMPLATE_ID,
+      tmpl ? tmpl : "Unknown",
       BOARD_FIRMWARE_VERSION,
       BOARD_HARDWARE_VERSION
     );
@@ -281,20 +282,22 @@ void enterConnectCloud() {
   while ((timeoutMs > millis()) &&
         (Blynk.connected() == false))
   {
+    delay(10);
     Blynk.run();
     if (!BlynkState::is(MODE_CONNECTING_CLOUD)) {
       Blynk.disconnect();
       return;
     }
   }
-  
-  if (Blynk.connected()) {
+
+  if (Blynk.isTokenInvalid()) {
+    BlynkState::set(MODE_WAIT_CONFIG);
+  } else if (Blynk.connected()) {
     BlynkState::set(MODE_RUNNING);
 
     if (!configStore.flagConfig) {
       configStore.flagConfig = true;
       config_save();
-      DEBUG_PRINT("Configuration stored to flash");
     }
   } else {
     BlynkState::set(MODE_ERROR);
@@ -306,8 +309,9 @@ void enterSwitchToSTA() {
 
   DEBUG_PRINT("Switching to STA...");
 
-  WiFi.end();
   delay(1000);
+  WiFi.end();
+  delay(100);
 
   BlynkState::set(MODE_CONNECTING_NET);
 }

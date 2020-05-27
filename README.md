@@ -52,35 +52,26 @@ Check out our Examples Browser: http://examples.blynk.cc
 
 ## Documentation and other helpful links
 
-[Full Blynk Documentation](http://docs.blynk.cc/#blynk-firmware) - a complete guide on Blynk features
-
-[Community (Forum)](http://community.blynk.cc) - join a 500,000 Blynk community to ask questions and share ideas
-
-[Help Center](http://help.blynk.cc) - helpful articles on various Blynk aspects
-
-[Code Examples Browser](http://examples.blynk.cc) - browse examples to explore Blynk possibilities
-
-[Official Website](https://blynk.io) 
+[Full Blynk Documentation](http://docs.blynk.cc/#blynk-firmware) - a complete guide on Blynk features  
+[Community (Forum)](http://community.blynk.cc) - join a 500,000 Blynk community to ask questions and share ideas  
+[Help Center](http://help.blynk.cc) - helpful articles on various Blynk aspects  
+[Code Examples Browser](http://examples.blynk.cc) - browse examples to explore Blynk possibilities  
+[Official Website](https://blynk.io)
 
 **Social Media:**
 
-[Facebook](https://www.fb.com/blynkapp)
-
-[Twitter](https://twitter.com/blynk_app)
-
-[Youtube](https://www.youtube.com/blynk)
-
-[Instagram](https://www.instagram.com/blynk.iot/)
-
+[Facebook](https://www.fb.com/blynkapp) | 
+[Twitter](https://twitter.com/blynk_app) | 
+[Youtube](https://www.youtube.com/blynk) | 
+[Instagram](https://www.instagram.com/blynk.iot/) | 
 [LinkedIn](https://www.linkedin.com/company/b-l-y-n-k/)
-
 
 ## Blynk libraries for other platforms
 * [Python, MicroPython](https://github.com/blynkkk/lib-python)
 
 ## Libraries by community
 * [Node.js, Espruino, Browsers](https://github.com/vshymanskyy/blynk-library-js)
-* [Python](https://github.com/vshymanskyy/blynk-library-python)
+* [Python, MicroPython](https://github.com/vshymanskyy/blynk-library-python)
 * [Particle](https://github.com/vshymanskyy/blynk-library-spark)
 * [Lua, OpenWrt, NodeMCU](https://github.com/vshymanskyy/blynk-library-lua)
 * [OpenWrt packages](https://github.com/vshymanskyy/blynk-library-openwrt)
